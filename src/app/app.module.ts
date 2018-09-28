@@ -7,7 +7,6 @@ import { AppComponent }  from './app.component';
 
 import { ArticleComponent }  from './article/article.component';
 import { ArticleService } from './article/article.service';
-import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [     
@@ -17,8 +16,7 @@ import { LoginComponent } from './login/login.component';
   ],
   declarations: [
         AppComponent,
-		ArticleComponent,
-		LoginComponent
+		ArticleComponent
   ],
   providers: [
         ArticleService
