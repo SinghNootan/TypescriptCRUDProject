@@ -1,0 +1,14 @@
+{
+  "articles": [
+    {
+      "title": "abc",
+      "category": "xyz",
+      "id": 2
+    },
+    {
+      "title": "blah blah",
+      "category": "not applicable",
+      "id": 3
+    }
+  ]
+}
