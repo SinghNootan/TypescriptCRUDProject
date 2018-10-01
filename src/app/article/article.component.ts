@@ -52,11 +52,16 @@ export class ArticleComponent implements OnInit {
         this.articleService.getAllArticles()
 	     .subscribe(articles => {
 			 
-		   //Generate article id	 
-		   let maxIndex = articles.length - 1;
-		   let articleWithMaxIndex = articles[maxIndex];
-		   let articleId = articleWithMaxIndex.id + 1;
-		   article.id = articleId;
+		   //Generate article id
+		   //Handle the condition when there will be no articles in db	 
+		   if (articles.length == 0) {  
+			article.id = 1;
+		   } else {
+			let maxIndex = articles.length - 1;
+			let articleWithMaxIndex = articles[maxIndex];
+		    let articleId = articleWithMaxIndex.id + 1;
+		    article.id = articleId;
+		   }
 		   
 		   //Create article
      	   this.articleService.createArticle(article)
