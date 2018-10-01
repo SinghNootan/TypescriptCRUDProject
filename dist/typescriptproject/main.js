@@ -134,7 +134,7 @@ module.exports = "h1 {\r\n    font-size: 2.0em;\r\n    margin: 20px 0 0 0;\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Simple CRUD Example using Typescript</h1>\r\n<h3 *ngIf=\"articleIdToUpdate; else create\"> \r\n   Update Article for Id: {{articleIdToUpdate}}\r\n</h3>\r\n<ng-template #create>\r\n   <h3> Create New Article </h3>\r\n</ng-template>\r\n<div>\r\n <form [formGroup]=\"articleForm\" (ngSubmit)=\"onArticleFormSubmit()\">\r\n  <table>\r\n    <tr><td>Enter Title</td><td><input formControlName=\"title\">\r\n\t       <label *ngIf=\"articleForm.get('title').invalid && processValidation\" [ngClass] = \"'error'\"> Title is required. </label>\r\n   \t</td></tr>\r\n    <tr><td>Enter Category</td><td><input formControlName=\"category\">\r\n\t       <label *ngIf=\"articleForm.get('category').invalid && processValidation\" [ngClass] = \"'error'\"> Category is required. </label>\r\n\t</td></tr>\t\r\n    <tr><td colspan=\"2\">\r\n\t    <button *ngIf=\"!articleIdToUpdate\">CREATE</button>  \r\n\t\t<button *ngIf=\"articleIdToUpdate\">UPDATE</button>  \r\n\t    <button (click)=\"backToCreateArticle()\" *ngIf=\"articleIdToUpdate\">Go Back</button>  \r\n\t</td></tr>\r\n  </table>\r\n </form> \r\n <br/>\r\n <div *ngIf=\"statusCode; else processing\">\r\n   <div *ngIf=\"statusCode === 201\" [ngClass] = \"'success'\">\r\n\t    Article added successfully.\r\n   </div>   \r\n   <div *ngIf=\"statusCode === 409\" [ngClass] = \"'success'\">\r\n        Article already exists.\r\n   </div>   \t\r\n   <div *ngIf=\"statusCode === 200\" [ngClass] = \"'success'\">\r\n        Article updated successfully.\r\n   </div>   \t      \r\n   <div *ngIf=\"statusCode === 204\" [ngClass] = \"'success'\">\r\n        Article deleted successfully.\r\n   </div>   \t   \r\n   <div *ngIf=\"statusCode === 500\" [ngClass] = \"'error'\">\r\n        Internal Server Error.\r\n   </div>\t\r\n </div>\r\n <ng-template #processing>\r\n\t<img *ngIf=\"requestProcessing\" src=\"assets/images/loading.gif\">\r\n </ng-template>\r\n</div>\r\n<h3>Article Details</h3>\r\n<table>\r\n  <tr><th> Id</th> <th>Title</th><th>Category</th><th></th><th></th></tr>\r\n  <tr *ngFor=\"let article of allArticles\" >\r\n    <td>{{article.id}}</td> <td>{{article.title}}</td> <td>{{article.category}}</td>\r\n\t<td><button type=\"button\" (click)=\"loadArticleToEdit(article.id)\">Edit</button> </td> \r\n\t<td><button type=\"button\" (click)=\"deleteArticle(article.id)\">Delete</button></td>\r\n  </tr>\r\n</table>\r\n"
+module.exports = "<h1>Welcome to typescriptproject!</h1>\r\n<h3 *ngIf=\"articleIdToUpdate; else create\"> \r\n   Update Article for Id: {{articleIdToUpdate}}\r\n</h3>\r\n<ng-template #create>\r\n   <h3> Create New Article </h3>\r\n</ng-template>\r\n<div>\r\n <form [formGroup]=\"articleForm\" (ngSubmit)=\"onArticleFormSubmit()\">\r\n  <table>\r\n    <tr><td>Enter Title</td><td><input formControlName=\"title\">\r\n\t       <label *ngIf=\"articleForm.get('title').invalid && processValidation\" [ngClass] = \"'error'\"> Title is required. </label>\r\n   \t</td></tr>\r\n    <tr><td>Enter Category</td><td><input formControlName=\"category\">\r\n\t       <label *ngIf=\"articleForm.get('category').invalid && processValidation\" [ngClass] = \"'error'\"> Category is required. </label>\r\n\t</td></tr>\t\r\n    <tr><td colspan=\"2\">\r\n\t    <button *ngIf=\"!articleIdToUpdate\">CREATE</button>  \r\n\t\t<button *ngIf=\"articleIdToUpdate\">UPDATE</button>  \r\n\t    <button (click)=\"backToCreateArticle()\" *ngIf=\"articleIdToUpdate\">Go Back</button>  \r\n\t</td></tr>\r\n  </table>\r\n </form> \r\n <br/>\r\n <div *ngIf=\"statusCode; else processing\">\r\n   <div *ngIf=\"statusCode === 201\" [ngClass] = \"'success'\">\r\n\t    Article added successfully.\r\n   </div>   \r\n   <div *ngIf=\"statusCode === 409\" [ngClass] = \"'success'\">\r\n        Article already exists.\r\n   </div>   \t\r\n   <div *ngIf=\"statusCode === 200\" [ngClass] = \"'success'\">\r\n        Article updated successfully.\r\n   </div>   \t      \r\n   <div *ngIf=\"statusCode === 204\" [ngClass] = \"'success'\">\r\n        Article deleted successfully.\r\n   </div>   \t   \r\n   <div *ngIf=\"statusCode === 500\" [ngClass] = \"'error'\">\r\n        Internal Server Error.\r\n   </div>\t\r\n </div>\r\n <ng-template #processing>\r\n\t<img *ngIf=\"requestProcessing\" src=\"assets/images/loading.gif\">\r\n </ng-template>\r\n</div>\r\n<h3>Article Details</h3>\r\n<table>\r\n  <tr><th> Id</th> <th>Title</th><th>Category</th><th></th><th></th></tr>\r\n  <tr *ngFor=\"let article of allArticles\" >\r\n    <td>{{article.id}}</td> <td>{{article.title}}</td> <td>{{article.category}}</td>\r\n\t<td><button type=\"button\" (click)=\"loadArticleToEdit(article.id)\">Edit</button> </td> \r\n\t<td><button type=\"button\" (click)=\"deleteArticle(article.id)\">Delete</button></td>\r\n  </tr>\r\n</table>\r\n"
 
 /***/ }),
 
@@ -200,11 +200,17 @@ var ArticleComponent = /** @class */ (function () {
             //Generate article id then create article
             this.articleService.getAllArticles()
                 .subscribe(function (articles) {
-                //Generate article id	 
-                var maxIndex = articles.length - 1;
-                var articleWithMaxIndex = articles[maxIndex];
-                var articleId = articleWithMaxIndex.id + 1;
-                article.id = articleId;
+                //Generate article id
+                //Handle the condition when there will be no articles in db	 
+                if (articles.length == 0) {
+                    article.id = 1;
+                }
+                else {
+                    var maxIndex = articles.length - 1;
+                    var articleWithMaxIndex = articles[maxIndex];
+                    var articleId = articleWithMaxIndex.id + 1;
+                    article.id = articleId;
+                }
                 //Create article
                 _this.articleService.createArticle(article)
                     .subscribe(function (successCode) {
@@ -410,7 +416,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/sygitech/Documents/typescriptdemo/typescriptproject/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/sygitech/Documents/TypescriptCRUDProject/src/main.ts */"./src/main.ts");
 
 
 /***/ })
